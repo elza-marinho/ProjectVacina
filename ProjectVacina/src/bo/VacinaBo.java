@@ -1,9 +1,11 @@
 package bo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dao.VacinaDao;
 import seletor.VacinaSeletor;
+import util.GeradorPlanilha;
 import vo.Vacina;
 
 public class VacinaBo {
@@ -35,6 +37,10 @@ public class VacinaBo {
 		}
 		return mensagem;
 
+	}
+	
+	public void gerarPlanilha(List<Vacina> vacinas, String caminhoEscolhido) {
+		GeradorPlanilha gerador = new GeradorPlanilha();
 	}
 		
 	}
