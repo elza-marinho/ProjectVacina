@@ -121,7 +121,6 @@ public class PesquisadorDao {
 		pesquisador.setCpf(rs.getString("cpf"));
 		pesquisador.setInstituicao(rs.getString("instituição"));
 		
-
 		return pesquisador;
 	}
 

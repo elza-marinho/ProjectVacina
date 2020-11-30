@@ -18,7 +18,7 @@ public class Pesquisador {
 	}
 
 
-	public Pesquisador(int id, String nome, String cpf, String instituicao,  char sexo) {
+	public Pesquisador(int id, String nome, String cpf, String instituicao, char sexo) {
 		super();
 		this.id = id;
 		this.nome = nome;
