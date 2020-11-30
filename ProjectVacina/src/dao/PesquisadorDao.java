@@ -54,7 +54,7 @@ public class PesquisadorDao {
 
 		boolean alterado = false;
 		try (Connection conexao = Banco.getConnection();
-				PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);) {
+			PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);) {
 			stmt.setString(1, pesquisador.getNome());
 			stmt.setString(2, pesquisador.getSexo() + "");
 			stmt.setString(3, pesquisador.getCpf());
