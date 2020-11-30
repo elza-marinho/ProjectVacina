@@ -1,6 +1,10 @@
 package seletor;
 
-import vo.Pesquisador;
+import java.time.LocalDate;
+
+
+
+import model.vo.Pesquisador;
 
 public class VacinaSeletor {
 	
@@ -9,6 +13,7 @@ public class VacinaSeletor {
 	private String pais;
 	private int estagioPesquisa;
 	private Pesquisador pesquisador;
+	private  LocalDate dataInicioPesquisa;
 
 	private int limite;
 	private int pagina;
@@ -38,6 +43,9 @@ public class VacinaSeletor {
 		}
 		
 		if(this.pesquisador!=null) {
+			return true;
+		}
+		if(this.dataInicioPesquisa!=null) {
 			return true;
 		}
 
@@ -76,21 +84,7 @@ public class VacinaSeletor {
 		this.pais = pais;
 	}
 
-	public int getLimite() {
-		return limite;
-	}
-
-	public void setLimite(int limite) {
-		this.limite = limite;
-	}
-
-	public int getPagina() {
-		return pagina;
-	}
-
-	public void setPagina(int pagina) {
-		this.pagina = pagina;
-	}
+	
 
 	public int getEstagioPesquisa() {
 		return estagioPesquisa;
@@ -108,6 +102,28 @@ public class VacinaSeletor {
 		this.pesquisador = pesquisador;
 	}
 
+	public LocalDate getDataInicioPesquisa() {
+		return dataInicioPesquisa;
+	}
+
+	public void setDataInicioPesquisa(LocalDate dataInicioPesquisa) {
+		this.dataInicioPesquisa = dataInicioPesquisa;
+	}
+	public int getLimite() {
+		return limite;
+	}
+
+	public void setLimite(int limite) {
+		this.limite = limite;
+	}
+
+	public int getPagina() {
+		return pagina;
+	}
+
+	public void setPagina(int pagina) {
+		this.pagina = pagina;
+	}
 }
 
 

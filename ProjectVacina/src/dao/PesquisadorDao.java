@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import vo.Pesquisador;
+import model.vo.Pesquisador;
 
 public class PesquisadorDao {
 	public Pesquisador cadastrar(Pesquisador novoPesquisador) {
 		Connection conn = Banco.getConnection();
 
-		String sql = "INSERT INTO PESQUISADOR ( NOME, CPF, SEXO, DATANASCIMENTO, INSTITUICAO )"
+		String sql = "INSERT INTO PESQUISADOR ( NOME, CPF, SEXO,  INSTITUICAO )"
 				+ " VALUES (?, ?, ?, ?, ?,?)";
 
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -25,7 +25,6 @@ public class PesquisadorDao {
 			stmt.setString(2, novoPesquisador.getNome());
 			stmt.setString(3, novoPesquisador.getCpf());
 			stmt.setString(4, novoPesquisador.getSexo() + "");
-			stmt.setDate(5, (Date) novoPesquisador.getDataNascimento());
 			stmt.setString(6, novoPesquisador.getInstituicao());
 			stmt.execute();
 
@@ -51,7 +50,7 @@ public class PesquisadorDao {
 
 	public boolean alterar(Pesquisador pesquisador) {
 
-		String sql = "UPDATE PESQUISADOR" + "SET  NOME=?, SEXO=?, CPF=?, DATANASCIMENTO=?, INSTITUICAO=?";
+		String sql = "UPDATE PESQUISADOR" + "SET  NOME=?, SEXO=?, CPF=?,  INSTITUICAO=?";
 
 		boolean alterado = false;
 		try (Connection conexao = Banco.getConnection();
@@ -59,8 +58,7 @@ public class PesquisadorDao {
 			stmt.setString(1, pesquisador.getNome());
 			stmt.setString(2, pesquisador.getSexo() + "");
 			stmt.setString(3, pesquisador.getCpf());
-			stmt.setDate(4, (Date) pesquisador.getDataNascimento());
-			stmt.setString(5, pesquisador.getInstituicao());
+			stmt.setString(4, pesquisador.getInstituicao());
 
 			int codigoRetorno = stmt.executeUpdate();
 
@@ -115,14 +113,14 @@ public class PesquisadorDao {
 
 	}
 
-	private Pesquisador construirPesquisadorDoResultSet(ResultSet rs) throws SQLException {
+	public Pesquisador construirPesquisadorDoResultSet(ResultSet rs) throws SQLException {
 		Pesquisador pesquisador = new Pesquisador();
 		pesquisador.setId(rs.getInt("id"));
 		pesquisador.setNome(rs.getString("some"));
 		pesquisador.setSexo(rs.getString("sexo").charAt(0));
 		pesquisador.setCpf(rs.getString("cpf"));
-		Date dataSQL = rs.getDate("Data de Nascimento");
 		pesquisador.setInstituicao(rs.getString("instituição"));
+		
 
 		return pesquisador;
 	}

@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.time.LocalDate;
 
 import seletor.VacinaSeletor;
-import vo.Pesquisador;
-import vo.Vacina;
+import model.vo.Pesquisador;
+import model.vo.Vacina;
 
 public class VacinaDao {
 	public Vacina cadastrar(Vacina novaVacina) {
@@ -208,6 +209,10 @@ public class VacinaDao {
 				}
 				
 			}
+			
+			if(seletor.getDataInicioPesquisa()!=null) {
+				sql+="AND";
+			}
 		}
 		return sql;
 	}
@@ -239,6 +244,8 @@ public class VacinaDao {
 		return true;
 
 	}
+	
+	
 
 	public ArrayList<Vacina> listarTodos() {
 		Connection conn = Banco.getConnection();
