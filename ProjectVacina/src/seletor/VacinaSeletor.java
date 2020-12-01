@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 
 
-import model.vo.Pesquisador;
+import vo.Pesquisador;
 
 public class VacinaSeletor {
 	

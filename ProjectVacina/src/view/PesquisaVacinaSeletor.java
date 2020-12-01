@@ -16,8 +16,8 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 
 import controller.VacinaController;
-import model.vo.Pesquisador;
-import model.vo.Vacina;
+import vo.Pesquisador;
+import vo.Vacina;
 import seletor.VacinaSeletor;
 
 import javax.swing.JButton;

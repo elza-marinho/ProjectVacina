@@ -3,7 +3,7 @@ package bo;
 import java.util.List;
 
 import dao.PesquisadorDao;
-import model.vo.Pesquisador;
+import vo.Pesquisador;
 
 public class PesquisadorBo {
 	public String excluirPorId(int idSelecionado) {

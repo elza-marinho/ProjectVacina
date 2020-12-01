@@ -10,7 +10,7 @@ package dao;
 	import java.util.ArrayList;
 	import java.util.List;
 
-	import model.vo.Pessoa;
+	import vo.Pessoa;
 
 	public class PessoaDao {
 		public Pessoa cadastrar(Pessoa novaPessoa) {

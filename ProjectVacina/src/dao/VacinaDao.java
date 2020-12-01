@@ -10,8 +10,8 @@ import java.util.List;
 import java.time.LocalDate;
 
 import seletor.VacinaSeletor;
-import model.vo.Pesquisador;
-import model.vo.Vacina;
+import vo.Pesquisador;
+import vo.Vacina;
 
 public class VacinaDao {
 	public Vacina cadastrar(Vacina novaVacina) {

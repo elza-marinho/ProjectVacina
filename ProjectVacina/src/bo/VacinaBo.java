@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import dao.VacinaDao;
 import seletor.VacinaSeletor;
 import util.GeradorPlanilha;
-import model.vo.Vacina;
+import vo.Vacina;
 
 public class VacinaBo {
 	VacinaDao vacinaDao = new VacinaDao();

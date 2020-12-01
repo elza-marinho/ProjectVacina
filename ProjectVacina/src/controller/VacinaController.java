@@ -11,8 +11,8 @@ import bo.VacinaBo;
 import dao.PesquisadorDao;
 import dao.VacinaDao;
 import seletor.VacinaSeletor;
-import model.vo.Pesquisador;
-import model.vo.Vacina;
+import vo.Pesquisador;
+import vo.Vacina;
 
 public class VacinaController {
 	VacinaDao vdao = new VacinaDao();

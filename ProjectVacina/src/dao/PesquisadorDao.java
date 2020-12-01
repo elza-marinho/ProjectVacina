@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import model.vo.Pesquisador;
+import vo.Pesquisador;
 
 public class PesquisadorDao {
 	public Pesquisador cadastrar(Pesquisador novoPesquisador) {
