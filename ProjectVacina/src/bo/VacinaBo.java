@@ -3,8 +3,11 @@ package bo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 
 import javax.swing.JOptionPane;
+=======
+>>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
 
 import dao.VacinaDao;
 import exception.DataInicioInvalidaException;
@@ -53,6 +56,14 @@ public class VacinaBo {
 
 	}
 	
+<<<<<<< HEAD
 }
+=======
+	public void gerarPlanilha(List<Vacina> vacinas, String caminhoEscolhido) {
+		GeradorPlanilha gerador = new GeradorPlanilha();
+	}
+		
+	}
+>>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
 
 
