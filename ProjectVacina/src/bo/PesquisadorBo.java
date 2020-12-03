@@ -20,13 +20,15 @@ public class PesquisadorBo {
 	}
 
 	public Pesquisador cadastrarPesquisador(Pesquisador pesquisador) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public boolean existeCpf(String txtCpf) {
-		// TODO Auto-generated method stub
+		PesquisadorDao pDao = new PesquisadorDao();
+		pDao.cpfJaUtilizado(txtCpf);
 		return false;
+		
 	}
 
 	public List<Pesquisador> listarTodos() {
