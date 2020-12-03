@@ -1,24 +1,26 @@
 package vo;
 
-public class Pesquisador {
+public class Pessoa {
+	
 	private int id;
 	private String nome;
 	private String cpf;
-	private String instituicao;
+	private int idade;
 	private char sexo;
-
-	public Pesquisador() {
+	
+	public Pessoa() {
 		super();
 
 	}
 
-	public Pesquisador(int id, String nome, String cpf, String instituicao, char sexo) {
+	public Pessoa(int id, String nome, String cpf, int idade, char sexo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.instituicao = instituicao;
+		this.idade = idade;
 		this.sexo = sexo;
+		
 	}
 
 	public int getId() {
@@ -45,12 +47,12 @@ public class Pesquisador {
 		this.cpf = cpf;
 	}
 
-	public String getInstituicao() {
-		return instituicao;
+	public int getIdade() {
+		return idade;
 	}
 
-	public void setInstituicao(String instituicao) {
-		this.instituicao = instituicao;
+	public void setIdade(int idade) {
+		this.idade = idade;
 	}
 
 	public char getSexo() {
@@ -61,9 +63,12 @@ public class Pesquisador {
 		this.sexo = sexo;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return nome  +", "+instituicao +" ";
+		return "Pessoa [nome=" + nome + ", cpf=" + cpf + ", idade=" + idade + ", sexo=" + sexo;
+	}
 
-}
+	
 }

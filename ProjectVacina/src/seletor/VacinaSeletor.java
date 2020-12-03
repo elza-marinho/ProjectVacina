@@ -11,7 +11,7 @@ public class VacinaSeletor {
 	private int id;
 	private String nome;
 	private String pais;
-	private int estagioPesquisa;
+	private String estagioPesquisa;
 	private Pesquisador pesquisador;
 	private  LocalDate dataInicioPesquisa;
 
@@ -38,7 +38,7 @@ public class VacinaSeletor {
 			return true;
 		}
 		
-		if(this.estagioPesquisa>0) {
+		if((this.estagioPesquisa!=null) &&(this.estagioPesquisa.trim().length()>0)) {
 			return true;
 		}
 		
@@ -86,11 +86,11 @@ public class VacinaSeletor {
 
 	
 
-	public int getEstagioPesquisa() {
+	public String getEstagioPesquisa() {
 		return estagioPesquisa;
 	}
 
-	public void setEstagioPesquisa(int estagioPesquisa) {
+	public void setEstagioPesquisa(String estagioPesquisa) {
 		this.estagioPesquisa = estagioPesquisa;
 	}
 

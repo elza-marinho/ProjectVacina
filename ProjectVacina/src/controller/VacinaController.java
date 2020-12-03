@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import bo.VacinaBo;
 import dao.PesquisadorDao;
 import dao.VacinaDao;
+import exception.DataInicioInvalidaException;
 import seletor.VacinaSeletor;
 import vo.Pesquisador;
 import vo.Vacina;
@@ -19,39 +21,48 @@ public class VacinaController {
 	VacinaBo vbo = new VacinaBo();
 	private JComboBox<Pesquisador> cbPesquisador;
 
-	public String validar(String textPais,  String textNome,Pesquisador pesquisadorSelecionado,  LocalDate dataInicio) {
+	public void validar(String textPais,  String textNome,Pesquisador pesquisadorSelecionado,  LocalDate dataInicio) {
 		String mensagem = "";
 		if (textPais == null)  {
-			mensagem +="O país de origem precisa ter no mínimo 2 letras";
+			JOptionPane.showMessageDialog(null, "O país de origem precisa ter no mínimo 2 letras");
 
 		}
 		
 		if (textNome == null) {
-			mensagem += "Nome precisa ter no mínimo 3 caracteres";
+			JOptionPane.showMessageDialog(null, "Nome precisa ter no mínimo 3 caracteres");
 		}
 		if((pesquisadorSelecionado ==null)) {
-			mensagem += "Selecione um pesquisador";
+			JOptionPane.showMessageDialog(null, "Selecione um pesquisador"); 
 		}
 		if((dataInicio == null)) {
-			mensagem += "Selecione a data da pesquisa";
+			JOptionPane.showMessageDialog(null, "Selecione a data da pesquisa"); 
 		}
-		return mensagem;
+		
 
+	}
+	public Vacina salvar(Vacina vacina) {
+		return vdao.salvar(vacina);
+		
 	}
 	
 	
-		public Vacina salvar(Vacina vacina) {
-			VacinaBo vbo = new VacinaBo();
-			vbo.salvar(vacina);
-			return vacina;
-			
-		 
+		
+	public static String validarData(LocalDate dataEscolhida) {
+		String mensagem ="";
+		if ((dataEscolhida == null)) {
+			mensagem = "Escolha uma data para  ser consultada";
 		}
-		
-			
+			return mensagem;
+	
+	}
 	
 		
 	
+	
+
+
+
+
 	public ArrayList<Vacina> listarComSeletor(VacinaSeletor seletor) {
 
 		return vbo.listarComSeletor(seletor);

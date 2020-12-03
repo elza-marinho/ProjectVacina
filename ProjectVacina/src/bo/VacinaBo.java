@@ -7,6 +7,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import dao.VacinaDao;
+import exception.DataInicioInvalidaException;
+
 import seletor.VacinaSeletor;
 import util.GeradorPlanilha;
 import vo.Vacina;
@@ -16,19 +18,18 @@ public class VacinaBo {
 
 	public Vacina cadastrarVacina(Vacina vacina) {
 		VacinaDao vacinaDao = new VacinaDao();
-		return vacinaDao.cadastrar(vacina);
+		return vacinaDao.salvar(vacina);
 	}
 	
-	public void salvar(Vacina vacina) {
-		
-		
+	public Vacina salvar(Vacina vacina) throws DataInicioInvalidaException {
 		if(vacina.getDataInicio().isAfter(LocalDate.now())) {
-			JOptionPane.showMessageDialog(null, "A data de início da pesquisa não pode ser anterior a data atual");
+			throw new DataInicioInvalidaException("Data de inicio da pesquisa deve ser anterior a data atual.");
 		}
-		vacinaDao.cadastrar(vacina);
 		
+		vacinaDao.salvar(vacina);
+		
+		return vacina;
 	}
-
 	public ArrayList<Vacina> listarComSeletor(VacinaSeletor seletor) {
 		
 		 return vacinaDao.listarComSeletor(seletor);
@@ -52,10 +53,6 @@ public class VacinaBo {
 
 	}
 	
-	public void gerarPlanilha(List<Vacina> vacinas, String caminhoEscolhido) {
-		GeradorPlanilha gerador = new GeradorPlanilha();
-	}
-		
-	}
+}
 
 

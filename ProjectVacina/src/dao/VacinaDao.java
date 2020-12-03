@@ -14,7 +14,7 @@ import vo.Pesquisador;
 import vo.Vacina;
 
 public class VacinaDao {
-	public Vacina cadastrar(Vacina novaVacina) {
+	public Vacina salvar(Vacina novaVacina) {
 		Connection conn = Banco.getConnection();
 
 		String sql = "INSERT INTO VACINA (ID, PAISORIGEM, DATAINICIO, ESTAGIOPESQUISA, PESQUISADOR, NOME )"
@@ -25,7 +25,7 @@ public class VacinaDao {
 
 			stmt.setString(1, novaVacina.getPaisOrigem());
 			Date dataConvertidaSQL = java.sql.Date.valueOf(novaVacina.getDataInicio());
-			stmt.setInt(3, novaVacina.getEstagioVacina());
+			stmt.setString(3, novaVacina.getEstagioVacina());
 			stmt.setInt(4, novaVacina.getId());
 			stmt.setString(5, novaVacina.getNome());
 			stmt.setInt(6, novaVacina.getPesquisador().getId());
@@ -64,7 +64,7 @@ public class VacinaDao {
 
 			stmt.setString(1, vacina.getPaisOrigem());
 			Date dataConvertidaSQL = java.sql.Date.valueOf(vacina.getDataInicio());
-			stmt.setInt(3, vacina.getEstagioVacina());
+			stmt.setString(3, vacina.getEstagioVacina());
 			stmt.setInt(4, vacina.getPesquisador().getId());
 			stmt.setString(5, vacina.getNome());
 
@@ -128,7 +128,7 @@ public class VacinaDao {
 		vac.setPaisOrigem(conjuntoResultante.getString("País de Origem"));
 		
 		vac.setNome(conjuntoResultante.getString("Nome"));
-		vac.setEstagioVacina(conjuntoResultante.getInt("Estágio da Vacina"));
+		vac.setEstagioVacina(conjuntoResultante.getString("Estágio da Vacina"));
 		vac.setDataInicio(conjuntoResultante.getDate("Data de Início").toLocalDate());
 
 		PesquisadorDao pesquisadorDao = new PesquisadorDao();
@@ -198,7 +198,7 @@ public class VacinaDao {
 			primeiro = false;
 
 		}
-		if (seletor.getEstagioPesquisa() > 0) {
+		if ((seletor.getEstagioPesquisa() !=null)  && (seletor.getEstagioPesquisa().trim().length()>0)){
 			if (!primeiro) {
 				sql += " AND ";
 			}

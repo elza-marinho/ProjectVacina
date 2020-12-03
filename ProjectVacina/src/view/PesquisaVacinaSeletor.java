@@ -31,7 +31,7 @@ public class PesquisaVacinaSeletor extends JFrame {
 	private JPanel contentPane;
 	private JTextField textNome;
 	private JTextField textPais;
-	private JComboBox cbEstagioPesquisa;
+	private JComboBox cbEstagio;
 	private JComboBox cbPesquisador;
 	private DatePicker dataInicioPesquisa;
 	private List<Vacina> vacinasConsultadas;
@@ -94,11 +94,11 @@ public class PesquisaVacinaSeletor extends JFrame {
 		lblEstagio.setBounds(20, 90, 100, 20);
 		contentPane.add(lblEstagio);
 		
-		JComboBox cbEstagioPesquisa = new JComboBox();
-		cbEstagioPesquisa.setModel(new DefaultComboBoxModel(new String[] {"Selecione:", "1- Testes", "2- Aplica\u00E7\u00E3o no P\u00FAblico"}));
-		cbEstagioPesquisa.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		cbEstagioPesquisa.setBounds(130, 90, 140, 20);
-		contentPane.add(cbEstagioPesquisa);
+		cbEstagio = new JComboBox();
+		cbEstagio.setModel(new DefaultComboBoxModel(new String[] {"Selecione:", "1- Testes", "2- Aplica\u00E7\u00E3o no P\u00FAblico"}));
+		cbEstagio.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cbEstagio.setBounds(130, 90, 140, 20);
+		contentPane.add(cbEstagio);
 		
 		JLabel lblPesquisador = new JLabel("Pesquisador:");
 		lblPesquisador.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -107,7 +107,7 @@ public class PesquisaVacinaSeletor extends JFrame {
 		
 		ArrayList<Pesquisador> pesquisadores = obterPesquisadoresMock();
 		cbPesquisador = new JComboBox(pesquisadores.toArray());
-		cbPesquisador.setBounds(100, 130, 170, 20);
+		cbPesquisador.setBounds(100, 130, 225, 20);
 		contentPane.add(cbPesquisador);
 		
 		JLabel lblDataInicio = new JLabel("Data Inicio Pesquisa:");
@@ -148,6 +148,8 @@ public class PesquisaVacinaSeletor extends JFrame {
 				seletor.setNome(textNome.getText());
 				seletor.setDataInicioPesquisa(dataInicioPesquisa.getDate());
 				seletor.setPais(textPais.getText());
+				seletor.setEstagioPesquisa(""+ cbEstagio.getSelectedItem().toString());
+				seletor.setPesquisador((Pesquisador)cbPesquisador.getSelectedItem());
 					
 				}
 				
@@ -184,7 +186,7 @@ public class PesquisaVacinaSeletor extends JFrame {
 
 	private ArrayList<Pesquisador> obterPesquisadoresMock() {
 		ArrayList<Pesquisador> pesquisadores = new ArrayList<Pesquisador>();
-		pesquisadores.add(new Pesquisador(1, "Alber Sabin", "23690399068", "UNIVERSIDADE DE NOVA YORK", 'm'));
+		pesquisadores.add(new Pesquisador(1, "Albert Sabin", "23690399068", "UNIVERSIDADE DE NOVA YORK", 'm'));
 		pesquisadores.add(new Pesquisador(2, "Osvaldo Cruz", " 59924002067", "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO", 'm'));
 		pesquisadores.add(new Pesquisador(3, "Carlos Chagas", " 63522680057", "UNIVERSIDADE FEDERAL DO RIO DE JANEIRO", 'm'));
 		return pesquisadores;
