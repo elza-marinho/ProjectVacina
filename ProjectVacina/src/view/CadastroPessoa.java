@@ -104,6 +104,13 @@ public class CadastroPessoa extends JFrame {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				char sexoSelecionado = ' ';
+
+				if (rdbtnmasculino.isSelected()) {
+					sexoSelecionado = 'M';
+				} else if (rdbtnFeminino.isSelected()) {
+					sexoSelecionado = 'F';
+				}
 
 				String mensagem = "";
 
