@@ -13,18 +13,18 @@ import atividade_vacina.model.vo.PessoaVO;
 import model.vo.Pessoa;
 
 public class PessoaDAO {
-	public Pessoa cadastrar(Pessoa novaPessoa) {
+	public Pessoa salvar(Pessoa novaPessoa) {
 		Connection conn = Banco.getConnection();
-		String sql = "INSERT INTO PESSOA ( NOME, CPF, SEXO, DATANASCIMENTO, VOLUNTARIO )" + " VALUES (?, ?, ?, ?, ?,?)";
+		String sql = "INSERT INTO PESSOA ( NOME, CPF, SEXO, IDADE)" + " VALUES (?, ?, ?, ?, ?)";
 
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 		ResultSet rs = null;
 		try {
 			stmt.setString(1, novaPessoa.getNome());
 			stmt.setString(2, novaPessoa.getCpf());
-			stmt.setString(3, novaPessoa.getSexo() + "");
-			stmt.setDate(4, (Date) novaPessoa.getDataNascimento());
-			stmt.setBoolean(5, novaPessoa.isVoluntario());
+			stmt.setString(3, novaPessoa.getSexo() + "")
+			Stmt.setInt(4, pessoa.getIdade());
+						
 			stmt.execute();
 
 			int refIdGerado = 0;
@@ -49,16 +49,15 @@ public class PessoaDAO {
 
 	public boolean alterar(Pessoa pessoa) {
 
-		String sql = "UPDATE PESSOA " + "SET NOME=?, CPF=?, DATANASCXIMENTO=?, SEXO=?, VOLUNTARIO=?";
+		String sql = "UPDATE PESSOA " + "SET NOME=?, CPF=?, IDADE=?, SEXO=?, VOLUNTARIO=?";
 		boolean alterado = false;
 		try (Connection conexao = Banco.getConnection();
 				PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);) {
 			stmt.setString(1, pessoa.getNome());
 			stmt.setString(2, pessoa.getCpf());
-			stmt.setDate(3, (Date) pessoa.getDataNascimento());
+			stmt.setInt(3, pessoa.getIdade());
 			stmt.setString(4, pessoa.getSexo() + "");
-			stmt.setBoolean(5, pessoa.isVoluntario());
-
+			
 			int codigoRetorno = stmt.executeUpdate();
 
 			alterado = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
@@ -116,9 +115,9 @@ public class PessoaDAO {
 		pessoa.setId(rs.getInt("id"));
 		pessoa.setNome(rs.getString("Nome"));
 		pessoa.setCpf(rs.getString("CPF"));
-		pessoa.setDataNascimento(rs.getDate("Data de Nascimento"));
+		pessoa.setIdade(rs.getInt("Idade"));
 		pessoa.setSexo(rs.getString("Sexo").charAt(0));
-		pessoa.setVoluntario(rs.getBoolean("Volunt·rio"));
+		
 
 		return pessoa;
 	}
@@ -171,7 +170,7 @@ public class PessoaDAO {
 			ResultSet rs = ps.executeQuery();
 			jaCadastrado = rs.next();
 		}catch(SQLException e) {
-			System.out.println("Erro ao verificar se o CPF "+pessoa.getCpf()+" j· foi utilizado. \nErro: "+e.getMessage());
+			System.out.println("Erro ao verificar se o CPF "+pessoa.getCpf()+" j√° foi utilizado. \nErro: "+e.getMessage());
 		}finally {
 			Banco.closeConnection(conn);
 			Banco.closePreparedStatement(ps);
@@ -179,5 +178,117 @@ public class PessoaDAO {
 		
 		return jaCadastrado;
 	}
+	
+	public List<Pessoa> listarTodos() {
+		Connection conn = Banco.getConnection();
+		String sql = " SELECT * FROM PESSOA ";
+
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+		ResultSet rs = null;
+		ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
+
+		try {
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				Pessoa pessoa = construirPessoaDoResultSet(rs);
+				pessoas.add(pessoa);
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Erro ao listar pessoas.");
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			Banco.closeResultSet(rs);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return pessoas;
+
+	}
+
+	public List<Pessoa> listarComSeletor(PessoaSeletor seletor) {
+
+		Connection conexao = Banco.getConnection();
+		String sql = " SELECT * FROM PESSOA p";
+		if (seletor.temFiltro()) {
+			sql = criarFiltros(seletor, sql);
+		}
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+
+		ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
+		try {
+			ResultSet result = prepStmt.executeQuery();
+
+			while (result.next()) {
+				Pessoa p = construirPessoaDoResultSet(result);
+				pessoas.add(p);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar pessoas com filtros. " + e.getMessage());
+		}
+		return pessoas;
+	}
+
+	private String criarFiltros(PessoaSeletor seletor, String sql) {
+
+		sql += " WHERE ";
+		boolean primeiro = true;
+
+		if (seletor.getId() > 0) {
+			if (!primeiro) {
+				sql += " AND ";
+			}
+
+			sql += "p.id = " + seletor.getId();
+			primeiro = false;
+		}
+
+		if ((seletor.getNome() != null) && (seletor.getNome().trim().length() > 0)) {
+			if (!primeiro) {
+				sql += "AND";
+			}
+			sql += "v.nome LIKE '%" + seletor.getNome() + "%'";
+			primeiro = false;
+		}
+		if (seletor.getCpf() != null && seletor.getCpf().trim().length() > 0) {
+			if (!primeiro) {
+				sql += " AND ";
+			}
+
+			sql += " CPF LIKE " + "'%" + seletor.getCpf() + "%' ";
+		}
+
+		if (seletor.getSexo() != null) {
+			if (!primeiro) {
+				sql += " AND ";
+			}
+			sql += "p.sexo = '" + seletor.getSexo() + "'";
+			primeiro = false;
+		}
+
+		return sql;
+	}
+
+	public boolean excluirPorCpf(String cpf) {
+
+		boolean excluido = false;
+		Connection conn = Banco.getConnection();
+		String sql = "DELETE FROM PESSOA WHERE CPF = '" + cpf + "'";
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
+		ResultSet rs = null;
+		try {
+			stmt.setString(3, cpf);
+
+			int codigoRetorno = stmt.executeUpdate();
+			excluido = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
+
+		} catch (SQLException e) {
+			System.out.println("Erro ao excluir pessoa pelo cpf (cpf " + cpf + ").\nCausa: " + e.getMessage());
+		} finally {
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return excluido;
+
 }
-/
