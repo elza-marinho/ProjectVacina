@@ -1,24 +1,21 @@
 package vo;
 
-<<<<<<< HEAD
-=======
+
 import java.time.LocalDate;
 import java.util.Date;
 
->>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
+
 public class Pesquisador {
 	private int id;
 	private String nome;
 	private String cpf;
 	private String instituicao;
-<<<<<<< HEAD
-=======
+
+
 	private LocalDate dataNascimento;
->>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
+
 	private char sexo;
-<<<<<<< HEAD
-=======
-	
+
 	
 	public Pesquisador(int id, String nome, String cpf, String instituicao, LocalDate dataNascimento, char sexo) {
 		super();
@@ -29,10 +26,9 @@ public class Pesquisador {
 		this.dataNascimento = dataNascimento;
 		this.sexo = sexo;
 	}
->>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
 
 
-<<<<<<< HEAD
+
 	}
 
 	public Pesquisador(int id, String nome, String cpf, String instituicao, char sexo) {
@@ -44,8 +40,7 @@ public class Pesquisador {
 		this.sexo = sexo;
 	}
 
-=======
->>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
+
 	public int getId() {
 		return id;
 	}
@@ -85,8 +80,7 @@ public class Pesquisador {
 		this.instituicao = instituicao;
 	}
 
-<<<<<<< HEAD
-=======
+
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
@@ -98,7 +92,7 @@ public class Pesquisador {
 	}
 
 
->>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
+
 	public char getSexo() {
 		return sexo;
 	}
@@ -111,21 +105,18 @@ public class Pesquisador {
 
 	@Override
 	public String toString() {
-<<<<<<< HEAD
+
 		return nome  +", "+instituicao +" ";
-=======
+
 		return "Pesquisador [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", instituicao=" + instituicao
 				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + "]";
 	}
 	
 	
->>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
 
-<<<<<<< HEAD
 }
-=======
-	
 
 	
->>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
+
+
 }
