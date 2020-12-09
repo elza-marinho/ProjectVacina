@@ -1,5 +1,9 @@
 package seletor;
 
+import java.time.LocalDate;
+
+
+
 import vo.Pesquisador;
 
 public class VacinaSeletor {
@@ -7,8 +11,9 @@ public class VacinaSeletor {
 	private int id;
 	private String nome;
 	private String pais;
-	private int estagioPesquisa;
+	private String estagioPesquisa;
 	private Pesquisador pesquisador;
+	private  LocalDate dataInicioPesquisa;
 
 	private int limite;
 	private int pagina;
@@ -33,11 +38,14 @@ public class VacinaSeletor {
 			return true;
 		}
 		
-		if(this.estagioPesquisa>0) {
+		if((this.estagioPesquisa!=null) &&(this.estagioPesquisa.trim().length()>0)) {
 			return true;
 		}
 		
 		if(this.pesquisador!=null) {
+			return true;
+		}
+		if(this.dataInicioPesquisa!=null) {
 			return true;
 		}
 
@@ -76,6 +84,31 @@ public class VacinaSeletor {
 		this.pais = pais;
 	}
 
+	
+
+	public String getEstagioPesquisa() {
+		return estagioPesquisa;
+	}
+
+	public void setEstagioPesquisa(String estagioPesquisa) {
+		this.estagioPesquisa = estagioPesquisa;
+	}
+
+	public Pesquisador getPesquisador() {
+		return pesquisador;
+	}
+
+	public void setPesquisador(Pesquisador pesquisador) {
+		this.pesquisador = pesquisador;
+	}
+
+	public LocalDate getDataInicioPesquisa() {
+		return dataInicioPesquisa;
+	}
+
+	public void setDataInicioPesquisa(LocalDate dataInicioPesquisa) {
+		this.dataInicioPesquisa = dataInicioPesquisa;
+	}
 	public int getLimite() {
 		return limite;
 	}
@@ -91,23 +124,6 @@ public class VacinaSeletor {
 	public void setPagina(int pagina) {
 		this.pagina = pagina;
 	}
-
-	public int getEstagioPesquisa() {
-		return estagioPesquisa;
-	}
-
-	public void setEstagioPesquisa(int estagioPesquisa) {
-		this.estagioPesquisa = estagioPesquisa;
-	}
-
-	public Pesquisador getPesquisador() {
-		return pesquisador;
-	}
-
-	public void setPesquisador(Pesquisador pesquisador) {
-		this.pesquisador = pesquisador;
-	}
-
 }
 
 

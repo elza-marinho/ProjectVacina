@@ -1,9 +1,17 @@
 package bo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
+
+import javax.swing.JOptionPane;
+=======
+>>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
 
 import dao.VacinaDao;
+import exception.DataInicioInvalidaException;
+
 import seletor.VacinaSeletor;
 import util.GeradorPlanilha;
 import vo.Vacina;
@@ -13,9 +21,18 @@ public class VacinaBo {
 
 	public Vacina cadastrarVacina(Vacina vacina) {
 		VacinaDao vacinaDao = new VacinaDao();
-		return vacinaDao.cadastrar(vacina);
+		return vacinaDao.salvar(vacina);
 	}
-
+	
+	public Vacina salvar(Vacina vacina) throws DataInicioInvalidaException {
+		if(vacina.getDataInicio().isAfter(LocalDate.now())) {
+			throw new DataInicioInvalidaException("Data de inicio da pesquisa deve ser anterior a data atual.");
+		}
+		
+		vacinaDao.salvar(vacina);
+		
+		return vacina;
+	}
 	public ArrayList<Vacina> listarComSeletor(VacinaSeletor seletor) {
 		
 		 return vacinaDao.listarComSeletor(seletor);
@@ -39,10 +56,14 @@ public class VacinaBo {
 
 	}
 	
+<<<<<<< HEAD
+}
+=======
 	public void gerarPlanilha(List<Vacina> vacinas, String caminhoEscolhido) {
 		GeradorPlanilha gerador = new GeradorPlanilha();
 	}
 		
 	}
+>>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
 
 
