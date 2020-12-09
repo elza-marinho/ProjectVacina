@@ -10,16 +10,15 @@ public class PessoaBO {
 	private Pessoa vo = new Pessoa();
 	public Pessoa cadastrar(Pessoa novaPessoa) {
 		
-		Pessoa pessoa = new Pessoa();
-		if(pessoa.getCpf() == null) {
-			System.out.println("A pessoa deve possuir CPF");
+		public String salvar(Pessoa pessoa) {
+		String mensagem ="";
+		if(pessoa.getId()>0) {
+			mensagem +="Cadastro com sucesso";
+		}else {
+			mensagem +="Erro no cadastro";
 		}
-		if(dao.cpfJaCadastrado(novaPessoa)) {
-			System.out.println("O CPF "+pessoa.getCpf()+" j· foi cadastrado");
-		}
-		return dao.cadastrar(novaPessoa);
-	}	
-		
+		return mensagem;
+	}
 	public boolean alterar(Pessoa pessoaAtualizada) {
 		
 		Pessoa pessoa = new Pessoa();
@@ -27,7 +26,7 @@ public class PessoaBO {
 			System.out.println("A pessoa deve possuir CPF");
 		}
 		if(dao.cpfJaCadastrado(pessoa)) {
-			System.out.println("O CPF "+pessoa.getCpf()+" j· foi cadastrado");
+			System.out.println("O CPF "+pessoa.getCpf()+" j√° foi cadastrado");
 		}
 		
 		return dao.alterar(pessoa);
@@ -54,5 +53,9 @@ public class PessoaBO {
 		return jaCadastrado;
 		
 	}
-	/
+	public List<Pessoa>listarComSeletor(PessoaSeletor seletor){
+		return dao.listarComSeletor(seletor);
+		
+	}
+	
 }
