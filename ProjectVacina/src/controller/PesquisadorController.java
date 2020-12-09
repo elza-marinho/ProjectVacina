@@ -19,27 +19,25 @@ public class PesquisadorController {
 			int idSelecionado = Integer.parseInt(textoIdSelecionado);
 			mensagem = bo.excluirPorId(idSelecionado);
 		} catch (NumberFormatException ex) {
-			mensagem = "Informe um número inteiro";
+			mensagem = "Informe um nÃºmero inteiro";
 		}
 		return mensagem;
 	}
 
-	public String validar(String Nome, String Cpf, String Instituicao) {
+	public String salvar(String textNome, String TextCpf, String textInstituicao) {
+		String mensagem ="";
 		Pesquisador pesquisador = new Pesquisador();
-		String mensagem = "";
-		if ((Nome == null) || (Nome.trim().length() < 3) || (Nome.trim().length() < 101)) {
-			JOptionPane.showMessageDialog(null, "Nome precisa ter no mínimo 3 caracteres");
-
-		}
-		if ((Cpf == null) || (Cpf.trim().length() != 11)) {
-			JOptionPane.showMessageDialog(null, "CPF contém somente 11 números");
-
-		}
-		if((Instituicao==null) || (Instituicao.trim().length()<3) ||(Instituicao.trim().length()<201))
-		{
-			JOptionPane.showMessageDialog(null, "Nome da Instituição precisa ter no mínimo 3 caracteres ");
-		}
 		
+		pesquisador.setNome(textNome);
+		pesquisador.setCpf(TextCpf);
+		pesquisador.setInstituicao(textInstituicao);
+		
+		mensagem += validar(pesquisador);
+		
+		if (mensagem.trim().isEmpty()) {
+			mensagem += "Salvo com sucesso";
+
+		}
 
 		return mensagem;
 	}
@@ -48,7 +46,7 @@ public class PesquisadorController {
 		String mensagem = "";
 		PesquisadorBo pesquisador = new PesquisadorBo();
 		if (pesquisador.existeCpf(txtCpf)) {
-			mensagem += "Este cpf já está sendo utilizado.\n";
+			mensagem += "Este cpf jÃ¡ estÃ¡ sendo utilizado.\n";
 		}
 		return mensagem;
 	}
@@ -57,15 +55,34 @@ public class PesquisadorController {
 		String mensagem = "";
 
 		if (txtCpf.length() != 11) {
-			mensagem += "O cpf deve possuir 11 dígitos.\n";
+			mensagem += "O cpf deve possuir 11 dÃ­gitos.\n";
 		}
 		if (txtCpf.isEmpty()) {
-			mensagem += "O campo do cpf não foi preenchido.\n";
+			mensagem += "O campo do cpf nÃ£o foi preenchido.\n";
 		}
 
 		return mensagem;
 	}
 	
+	public String validar(String Nome, String Cpf, String Instituicao) {
+		Pesquisador pesquisador = new Pesquisador();
+		String mensagem = "";
+		if ((Nome == null) || (Nome.trim().length() < 3) || (Nome.trim().length() < 101)) {
+			mensagem += "Nome precisa ter no mÃ­nimo 3 caracteres";
+
+		}
+		if ((Cpf == null) || (Cpf.trim().length() != 11)) {
+			mensagem += "CPF contÃ©m somente 11 nÃºmeros";
+
+		}
+		if((Instituicao==null) || (Instituicao.trim().length()<3) ||(Instituicao.trim().length()<201))
+		{
+			mensagem+= "Nome da InstituiÃ§Ã£o precisa ter no mÃ­nimo 3 caracteres ";
+		}
+		
+
+		return mensagem;
+	}
 	
 
 	public List<Pesquisador> listarTodosOsPesquisadores() {
