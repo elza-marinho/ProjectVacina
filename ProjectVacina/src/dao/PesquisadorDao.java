@@ -12,7 +12,7 @@ import java.util.List;
 import vo.Pesquisador;
 
 public class PesquisadorDao {
-	public Pesquisador cadastrar(Pesquisador novoPesquisador) {
+	public Pesquisador salvar(Pesquisador novoPesquisador) {
 		Connection conn = Banco.getConnection();
 
 		String sql = "INSERT INTO PESQUISADOR ( NOME, CPF, SEXO,  INSTITUICAO )"
@@ -119,7 +119,7 @@ public class PesquisadorDao {
 		pesquisador.setNome(rs.getString("some"));
 		pesquisador.setSexo(rs.getString("sexo").charAt(0));
 		pesquisador.setCpf(rs.getString("cpf"));
-		pesquisador.setInstituicao(rs.getString("instituição"));
+		pesquisador.setInstituicao(rs.getString("instituiÃ§Ã£o"));
 		
 		return pesquisador;
 	}
@@ -162,7 +162,7 @@ public class PesquisadorDao {
 			rs = stmt.executeQuery();
 			cpfUsado = rs.next();
 		} catch (SQLException e) {
-			System.out.println("Erro na verificação de uso do CPF. Causa: " + e.getMessage());
+			System.out.println("Erro na verificaÃ§Ã£o de uso do CPF. Causa: " + e.getMessage());
 		} finally {
 			Banco.closeResultSet(rs);
 			Banco.closePreparedStatement(stmt);
