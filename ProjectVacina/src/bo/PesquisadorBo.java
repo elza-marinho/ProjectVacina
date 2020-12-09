@@ -11,7 +11,7 @@ public class PesquisadorBo {
 		String mensagem = "";
 		PesquisadorDao pDao = new PesquisadorDao();
 		if (pDao.excluir(idSelecionado)) {
-			mensagem = "Excluído com sucesso";
+			mensagem = "ExcluÃ­do com sucesso";
 		} else {
 			mensagem = "Erro ao excluir";
 		}
@@ -19,9 +19,10 @@ public class PesquisadorBo {
 
 	}
 
-	public Pesquisador cadastrarPesquisador(Pesquisador pesquisador) {
+	public Pesquisador salvar(Pesquisador pesquisador) {
+		PesquisadorDao pDao = new PesquisadorDao();
 		
-		return null;
+		return pDao.salvar(pesquisador);
 	}
 
 	public boolean existeCpf(String txtCpf) {
