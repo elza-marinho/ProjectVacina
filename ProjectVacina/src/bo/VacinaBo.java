@@ -6,8 +6,7 @@ import java.util.List;
 <<<<<<< HEAD
 
 import javax.swing.JOptionPane;
-=======
->>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
+
 
 import dao.VacinaDao;
 import exception.DataInicioInvalidaException;
@@ -48,7 +47,7 @@ public class VacinaBo {
 		String mensagem = "";
 		VacinaDao vacinaDao = new VacinaDao();
 		if (vacinaDao.excluir(idSelecionado)) {
-			mensagem = "Excluído com sucesso";
+			mensagem = "ExcluÃ­do com sucesso";
 		} else {
 			mensagem = "Erro ao excluir";
 		}
@@ -56,14 +55,11 @@ public class VacinaBo {
 
 	}
 	
-<<<<<<< HEAD
-}
-=======
+
 	public void gerarPlanilha(List<Vacina> vacinas, String caminhoEscolhido) {
 		GeradorPlanilha gerador = new GeradorPlanilha();
 	}
 		
 	}
->>>>>>> branch 'master' of https://github.com/elza-marinho/ProjectVacina
 
 
