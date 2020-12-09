@@ -11,15 +11,18 @@ public class PessoaController {
 	PessoaBO bo = new PessoaBO();
 	
 	
-	public String validarCamposTexto(String Nome, String Cpf) {
-		Pessoa pessoa = new Pessoa();
+	public String salvar(String textNome, String textCpf, String textIdade) {
 		String mensagem = "";
-		if ((Nome == null) || (Nome.trim().length() < 3) || (Nome.trim().length() < 101)) {
-			JOptionPane.showMessageDialog(null, "Nome precisa ter no mÌnimo 3 caracteres");
 
-		}
-		if ((Cpf == null) || (Cpf.trim().length() != 11)) {
-			JOptionPane.showMessageDialog(null, "CPF contÈm somente 11 n˙meros");
+		Pessoa pessoa = new Pessoa();
+		pessoa.setNome(textNome);
+		pessoa.setCpf(textCpf);
+		pessoa.setIdade(Integer.parseInt(textIdade));
+
+		mensagem += validar(pessoa);
+
+		if (mensagem.trim().isEmpty()) {
+			mensagem += "Salvo com sucesso";
 
 		}
 
@@ -27,8 +30,23 @@ public class PessoaController {
 	}
 
 	private String validar(Pessoa pessoa) {
+		String mensagem = "";
+
+		if ((pessoa.getNome() == null) || (pessoa.getNome().trim().length() < 3)
+				|| (pessoa.getNome().trim().length() > 100)) {
+			mensagem += "- O Nome precisa deve ter entre 3 e 100 caracteres; " + "\n";
+		}
+		if ((pessoa.getCpf() == null) || (pessoa.getCpf().length() != 11)) {
+			mensagem += "- O CPF deve conter 11 n√∫meros; " + "\n";
+		}
+		if(pessoa.getIdade()<50) {
+			mensagem += "Pessoa fora da idade para se qualificar para a vacina";
+			
+		}
+		return mensagem;
+	}
 		
-		return null;
+		
 	}
 
 	
@@ -37,7 +55,7 @@ public class PessoaController {
 		String mensagem = "";
 
 		if (bo.cpfCadastrado(txtCpf)) {
-			mensagem += "Este cpf j· est· sendo utilizado.\n";
+			mensagem += "Este cpf j√° est√° sendo utilizado.\n";
 		}
 		return mensagem;
 	}
@@ -46,10 +64,10 @@ public class PessoaController {
 		String mensagem = "";
 
 		if (txtCpf.length() != 11) {
-			mensagem += "O cpf deve possuir 11 dÌgitos.\n";
+			mensagem += "O cpf deve possuir 11 d√≠gitos.\n";
 		}
 		if (txtCpf.isEmpty()) {
-			mensagem += "O campo do cpf n„o foi preenchido.\n";
+			mensagem += "O campo do cpf n√£o foi preenchido.\n";
 		}
 
 		return mensagem;
@@ -61,19 +79,13 @@ public class PessoaController {
 			int idSelecionado = Integer.parseInt(textoIdSelecionado);
 			mensagem = bo.excluir(idSelecionado);
 		} catch (NumberFormatException ex) {
-			mensagem = "Informe um n˙mero inteiro";
+			mensagem = "Informe um n√∫mero inteiro";
 		}
 		return mensagem;
 	}
-	public String salvarPessoa() {
-		String mensagem = "";
-		Pessoa pessoa = new Pessoa();
-		pessoa.getNome();
-		pessoa.getCpf();
-		pessoa.getDataNascimento();
-		pessoa.getSexo();
-		pessoa.isVoluntario();
-		return mensagem ;
+	public List<Pessoa> listarComSeletor(PessoaSeletor seletor) {
+
+		return dao.listarComSeletor(seletor);
 	}
-	/
+	
 }
